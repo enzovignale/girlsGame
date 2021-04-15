@@ -12,19 +12,19 @@ class actionFigure{
 
 document.addEventListener('DOMContentLoaded', () => {
     const dino = document.querySelector('.dino');
-    const grid = document.querySelector('.grid');
-    const body = document.querySelector('body');
+    const grid = document.querySelector('#desert');
+    // const body = document.querySelector('body');
     const alert = document.getElementById('alert');
     let isJumping = false;
-    let gravity = 0.9;
+    // let gravity = 0.9;
     let isGameOver = false;
     let position = 0;
     let number = -5;
     let request;
     let power = 17;
     let delay = .24;
-    let progress;
-    let stopId;
+    // let progress;
+    // let stopId;
     
     function control(e) {
         if (e.keyCode === 32) {
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const performAnimation = () => {
         request = requestAnimationFrame(performAnimation)
         position = (power*25 - power*(Math.pow(number, 2) ))
-        dino.style.bottom = position/2 + 'px';
+        dino.style.setProperty('--dinoOriginalPosition', position/2+'px');
         number+=delay;
         if(number >= 5){
             cancelAnimationFrame(request);
@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // }
     
     function generateObstacles() {
-        //TODO: This needs a lot of work
+        //TODO: This needs a lot of work!!!!
         let randomTime = Math.random() * 4000;
         let obstaclePosition = 2000;
 
@@ -68,23 +68,25 @@ document.addEventListener('DOMContentLoaded', () => {
         obstacle.style.left = obstaclePosition + 'px';
 
         //Detecting Collision
-        let timerId = setInterval(function() {
+        let timerId = setInterval(()=>{
         if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60) {
             clearInterval(timerId);
             alert.innerHTML = 'Game Over';
             isGameOver = true;
             //remove all children
-            body.removeChild(body.firstChild);
-            while (grid.firstChild) {
-                grid.removeChild(grid.lastChild)
-            }
+            //TODO: Need to fix removing node
+            // body.removeChild(body.firstChild);
+            // while (grid.firstChild) {
+            //     grid.removeChild(grid.lastChild)
+            // }
         }
             obstaclePosition -=20;
             obstacle.style.left = obstaclePosition + 'px';
         },20);
 
         // if Collision happen, stop animation
-        if (!isGameOver) setTimeout(generateObstacles, randomTime)
+        //TODO: Need to fine another way to stop the game
+        //if (!isGameOver) setTimeout(generateObstacles, randomTime)
     }
 
 

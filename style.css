@@ -1,3 +1,7 @@
+:root{
+    --dinoOriginalPosition: 13px;
+    --desertSpeed: 660s
+}
 .container{
     display: flex;
     justify-content: center;
@@ -7,7 +11,7 @@
     width: 60px;
     height: 60px;
     background-image: url(./t-rex.png);
-    bottom: 13px;
+    bottom: var(--dinoOriginalPosition);
     left:10px;
 }
 
@@ -19,7 +23,7 @@
     bottom: 0px;
 }
 
-@keyframes slideright {
+@keyframes slide_right {
     from {
         background-position: 70000%;
     }
@@ -28,7 +32,7 @@
     }
 }
 
-@-webkit-keyframes slideright {
+@-webkit-keyframes slide_right {
     from {
         background-position: 70000%;
     }
@@ -43,7 +47,7 @@
     background-image: url('./t-rex-background.png');
     background-repeat: repeat-x;
     background-size: auto 300px;
-    animation: slideright 660s infinite linear;
+    animation: slide_right var(--desertSpeed) infinite linear;
     width: 90%;
     height: 300px;
     border: 1px solid #000;
